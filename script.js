@@ -18,6 +18,7 @@ function leerIntento() {
     let intento = document.getElementById("guess-input");
     intento = intento.value;
     intento = intento.toUpperCase();
+    intento = intento.trim();
     error.style.display = "none";
     return intento;
 }
