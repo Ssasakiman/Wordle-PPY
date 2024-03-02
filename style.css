@@ -20,7 +20,7 @@ h1 {
     
 #Contenedor{
     width: 500px;
-    height: 750px;
+    height: 820px;
     text-align: center;
     position: absolute;
     inset: 0;
@@ -132,4 +132,28 @@ button:active:after {
 #reintentar {
     font-family: 'Montserrat', sans-serif;
     display: none;
+}
+
+#info {
+    display: inline-block;
+    position: relative;
+    right: 0%;
+    top: 0%;
+}
+
+#closeinfo {
+    display: none;
+    right: 0%;
+    top: 0%;
+}
+
+#Instrucciones {
+    display: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: normal;
+    line-height: 45px;
+    margin-left: 15px;
+    margin-right: 15px;
 }

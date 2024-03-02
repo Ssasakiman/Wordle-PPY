@@ -1,13 +1,18 @@
-let diccionario = ["APPLE" , "ANGEL", "ROBIN" , "VALOR", "PARTY" , "DREAM" , "DRINK" , "DRUMS" , "BEARS" , "CRAZY" , "HORSE" ];
-let palabra = diccionario[Math.floor(Math.random()*diccionario.length)];
-let intentos= 5;
+//let diccionario = ["APPLE" , "ANGEL", "ROBIN" , "VALOR", "PARTY" , "DREAM" , "DRINK" , "DRUMS" , "BEARS" , "CRAZY" , "HORSE" ];
+let palabra
+let intentos= 6;
 const input = document.getElementById("guess-input");
 const boton = document.getElementById("guess-button");
 const valor = input.value;
 let error = document.getElementById("noesc");
 const reintentar = document.getElementById("reintentar");
+let botinfo = document.getElementById("info");
+let botclose = document.getElementById("closeinfo");
+const instrucciones = document.getElementById("Instrucciones");
+const juego = document.getElementById("Juego");
 
-//window.addEventListener("load", init)
+window.addEventListener("load", nuevaPalabra())
+
 
 function leerIntento() {
     let intento = document.getElementById("guess-input");
@@ -16,6 +21,21 @@ function leerIntento() {
     error.style.display = "none";
     return intento;
 }
+
+botinfo.addEventListener("click", ()=> {
+    botinfo.style.display = "none";
+    botclose.style.display = "inline-block";
+    juego.style.display = "none";
+    instrucciones.style.display = "block";
+})
+
+botclose.addEventListener("click", ()=> {
+    botinfo.style.display = "inline-block";
+    botclose.style.display = "none";
+    juego.style.display = "block";
+    instrucciones.style.display = "none";
+})
+
 
 function terminar(mensaje){
     input.disabled = true;
@@ -31,6 +51,7 @@ function terminar(mensaje){
     }
     reintentar.style.display= "block";
     boton.style.display= "none";
+    palabra = nuevaPalabra();
 }
 
 function intentar(){
@@ -38,9 +59,10 @@ function intentar(){
     const GRID = document.getElementById("grid");
     const ROW = document.createElement("div");
     ROW.className = "row";
-    if(INTENTO.length!=5){
+    input.value = "";
+    if(INTENTO.length!=5 ||  !isNaN(INTENTO)){
         error.style.display= "block";
-        error.innerHTML= "¡Debe ser de 5 letras!";
+        error.innerHTML= "¡Debe ser una palabra de 5 letras!";
         error.style.color= "red";
         return;
     }
@@ -50,6 +72,7 @@ function intentar(){
         return;
     }
     error.style.display= "none";
+
     for (let i in palabra) {
         const SPAN = document.createElement("span");
         SPAN.className = "letter";
@@ -61,19 +84,31 @@ function intentar(){
         } else {
             SPAN.style.backgroundColor = "#a4aec4";
         }
+
         ROW.appendChild(SPAN);
-    }
+        }
     GRID.appendChild(ROW);
     intentos--
     if (intentos==0){
         terminar("<h1 style='color: red;'>¡PERDISTE! >:)</h1>");
-    }
-}
+    }}
 
-boton.addEventListener ("click", intentar,);
+input.addEventListener ("keypress", (event)=> {
+    if(event.key === "Enter"){
+        intentar();
+    }
+});
+boton.addEventListener ("click", intentar);
 
 function nuevaPalabra() {
-    return diccionario[Math.floor(Math.random() * diccionario.length)];
+    const API = "https://random-word-api.vercel.app/api?words=1&length=5&type=uppercase";
+    fetch(API).then ((response)=> {
+        response.json().then((json)=> {
+            palabra= json[0].toUpperCase();
+            console.log(palabra);
+            reintentar.disabled = false;
+        })
+    });
 }
 
 function reiniciarJuego(){
@@ -88,8 +123,7 @@ function reiniciarJuego(){
         contenedor.innerHTML= "";
         answer.innerHTML="";
         intentosant.innerHTML="";
-        intentos = 5
-        palabra = nuevaPalabra();
+        intentos = 6;
 }
 
-reintentar.addEventListener ("click", reiniciarJuego)
+reintentar.addEventListener ("click", reiniciarJuego);

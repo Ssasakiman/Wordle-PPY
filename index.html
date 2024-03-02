@@ -8,15 +8,28 @@
    </head>
 </head>
 <body>
+    <button id="info">Instrucciones</button>
+    <button id="closeinfo">Volver</button>
   <div id="Contenedor">
     <h1>Wordle PPY</h1>
-    <p class="aviso" id="answer"></p>
-    <div id="grid"></div>
-    <input type="text" id="guess-input">
-    <button id="guess-button">Intentar</button>
-    <button id="reintentar">Reintentar</button>
-    <p id="guesses"></p>
-    <p class="aviso" id="noesc">Ingrese una palabra de 5 letras</p>
+    <div id="Instrucciones">
+      <ul>
+        <li style="color: whitesmoke;">Todas las palabras están en inglés, y son de cinco letras.</li>
+        <li style="color: green;"> Si la letra está en la palabra y en la posición correcta, se pintara de verde.</li>
+        <li style="color: yellow;"> Si la letra está en la palabra, pero en posición incorrecta, se pintará de amarillo.</li>
+        <li style="color: grey;"> Si la letra no está en la palabra, se pintará de gris.</li>
+        <li style="color: whitesmoke;"> Las respuestas se van mostrando en la consola ;) </li>
+      </ul>
+    </div>
+    <div id="Juego">
+      <p class="aviso" id="answer"></p>
+      <div id="grid"></div>
+      <input type="text" id="guess-input">
+      <button id="guess-button">Intentar</button>
+      <button id="reintentar">Reintentar</button>
+      <p id="guesses"></p>
+      <p class="aviso" id="noesc">Ingrese una palabra de 5 letras</p>
+  </div>
   </div>
 </body>
 </html>
